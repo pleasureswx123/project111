@@ -1,0 +1,152 @@
+@fontFamily {
+  font: normal 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: normal 12px/1.5 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Tahoma,Verdana,Georgia,Helvetica,Arial,'Lucida Family',Times,'Trebuchet MS', sans-serif;
+  font-family: Tahoma,Verdana,Helvetica, Arial, sans-serif;
+}
+
+img {
+   vertical-align: middle;
+   border: 0 none;
+ }
+
+.hide-text {
+   font: 0/0 a;
+   color: transparent;
+   text-shadow: none;
+   background-color: transparent;
+   border: 0;
+ }
+.tx-elli {
+  word-wrap: normal;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  outline: 0 !important;
+}
+
+
+html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+body {font-size: 1.4rem;/*1.4 × 10px = 14px */}
+h1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+a {
+  outline: none;
+}
+
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.row {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.cell,.flex1 {
+  display: block;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+
+  min-width: 0;
+  flex-basis: 50%;
+}
+.colLayout {
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.verCenter {
+  -webkit-box-align: center;
+  box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.horCenter {
+  -webkit-box-pack: center;
+  box-pack: center;
+  -webkit-justify-content:center;
+  justify-content:center;
+}
+.o-fix {
+  overflow: hidden
+}
+
+.c-fix {
+  &:before, &:after {
+    display: table;
+    content: '.';
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+  *zoom: 1;
+}
+.ellipsis {
+  overflow: hidden;
+  outline: 0 !important;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+.ellipsisNum {
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  display: box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+}

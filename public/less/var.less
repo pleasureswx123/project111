@@ -1,0 +1,64 @@
+.c-fix {
+  &:before, &:after {
+    display: table;
+    content: '.';
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+  *zoom: 1;
+}
+.lf {
+  float: left;
+  display: inline;
+}
+
+.ellipsis {
+  overflow: hidden;
+  outline: 0 !important;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+.blockInlineBox {
+  font-size: 0;
+  *word-spacing: -1px;
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    & {
+      letter-spacing: -5px;
+    }
+  }
+}
+.inlineElem {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: text-top;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+
+.inlineBlockWrap(@item:li) {
+  &:extend(.blockInlineBox);
+  @{item}{
+    &:extend(.inlineElem);
+  }
+}
+.box-shadow(@x: 0; @y: 0; @blur: 1px; @z:0; @color: #eee) {
+  -webkit-box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  box-shadow: @arguments;
+}
+.h2Box {
+  color: #222;
+  font-size: 20px;
+}
+.introBox {
+  color: #98989c;
+}

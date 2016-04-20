@@ -1,0 +1,57 @@
+@import "../var";
+@itemWidth : 208px;
+.mod1 {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 82%;
+  h2 {
+    &:extend(.h2Box);
+  }
+  .intro {
+    &:extend(.introBox);
+  }
+  .title {
+    padding: 10px 0 15px;
+    color: #8d8d92;
+  }
+  ul {
+    .inlineBlockWrap;
+    padding-top: 10px;
+    margin:0 -15px;
+    li {
+      cursor: pointer;
+      padding: 0 15px;
+      .box,.title{
+        font-size: 14px;
+        width: @itemWidth;
+        margin: 0 auto;
+      }
+      &.active .box {
+        .box-shadow(0; 0; 20px; 8px; #aeacac);
+        position: relative;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 20px;
+          right: 10px;
+          background: url(../../images/screenActiveStatus.png) no-repeat center;
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+  }
+  .addScreenBtn {
+    height: 370px;
+    border:1px dashed #a8a8a8;
+    background: url(../../images/addScreenBtn.png) no-repeat center;
+  }
+  .box,.bg {
+    width: @itemWidth;
+    height: 370px;
+  }
+  .box {
+    overflow: hidden;
+    .box-shadow(0; 1px; 5px; 1px; #ccc);
+  }
+}

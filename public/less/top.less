@@ -1,0 +1,32 @@
+.miuiTop {
+  background: #fff;
+  margin:-30px -30px 30px -30px;
+  border-bottom:1px solid #d0d0d0;
+  text-align: right;
+  span {
+    display: inline-block;
+    border-left:1px solid #d9d9d9;
+    height: 57px;
+    line-height: 57px;
+    padding:0 25px 0 50px;
+    position: relative;
+    &:before {
+      position: absolute;
+      background: url(../images/topIcon.png);
+      content: '';
+      width: 35px;
+      height: 34px;
+      top:11px;
+      left:10px;
+    }
+  }
+  .new:before {
+    background-position: 0 0;
+  }
+  .export:before {
+    background-position: -35px 0;
+  }
+  .subject:before {
+    background-position: -70px 0;
+  }
+}

@@ -1,0 +1,129 @@
+.miuiNav {
+  li,a,div {
+    display: block;
+    color: #fff;
+  }
+  .one,.two,.three,.four,.five,.six,.seven {
+    border-bottom: 1px solid #3c3c44;
+  }
+  li,a,div {
+    cursor: pointer;
+    text-decoration: none;
+  }
+  li.active {
+    .title:after {
+      background-position: -175px -25px;
+    }
+    .subBox {
+      display: block;
+    }
+    .active {
+      border-left: 4px solid #ff7b56;
+      background: #47474e;
+    }
+
+    &.one .title {
+      &:before {
+        background-position: 0 -25px;
+      }
+    }
+    &.two .title {
+      &:before {
+        background-position: -25px -25px;
+      }
+    }
+    &.three .title {
+      &:before {
+        background-position: -50px -25px;
+      }
+    }
+    &.four .title {
+      &:before {
+        background-position: -75px -25px;
+      }
+    }
+    &.five .title {
+      &:before {
+        background-position:-100px -25px;
+      }
+    }
+    &.six .title {
+      &:before {
+        background-position: -125px -25px;
+      }
+    }
+    &.seven .title {
+      &:before {
+        background-position: -150px -25px;
+      }
+    }
+
+
+  }
+  .title {
+    padding:0 34px 0 63px;
+    border-left:4px solid transparent;
+    height: 49px;
+    line-height:49px;
+    position: relative;
+    &:after,&:before {
+      background: url(../images/icon.png) no-repeat;
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      content: '';
+      top: 12px;
+    }
+    &:before {
+      left:18px
+    }
+    &:after {
+      right:20px;
+      background-position: -175px 0;
+    }
+  }
+  .one .title {
+    &:before {
+      background-position: 0 0;
+    }
+  }
+  .two .title {
+    &:before {
+      background-position: -25px 0;
+    }
+  }
+  .three .title {
+    &:before {
+      background-position: -50px 0;
+    }
+  }
+  .four .title {
+    &:before {
+      background-position: -75px 0;
+    }
+  }
+  .five .title {
+    &:before {
+      background-position:-100px 0;
+    }
+  }
+  .six .title {
+    &:before {
+      background-position: -125px 0;
+    }
+  }
+  .seven .title {
+    &:before {
+      background-position: -150px 0;
+    }
+  }
+  .subBox {
+    display: none;
+    a {
+      padding:0 34px 0 63px;
+      border-left: 4px solid transparent;
+      height: 49px;
+      line-height:49px;
+    }
+  }
+}

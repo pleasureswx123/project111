@@ -1,0 +1,984 @@
+
+    .row {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+    }
+    .cell,.flex1 {
+        display: block;
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+
+        min-width: 0;
+        flex-basis: 50%;
+    }
+    .colLayout {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+    .verCenter {
+        -webkit-box-align: center;
+        box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    .horCenter {
+        -webkit-box-pack: center;
+        box-pack: center;
+        -webkit-justify-content:center;
+        justify-content:center;
+    }
+    .o-fix {
+        overflow: hidden
+    }
+    .c-fix:before,
+    .c-fix:after {
+        display: table;
+        content: '.';
+        height: 0;
+        font-size: 0;
+        line-height: 0;
+        visibility: hidden;
+    }
+    .c-fix:after {
+        clear: both;
+    }
+    .c-fix {
+        *zoom: 1;
+    }
+    .ellipsis {
+        overflow: hidden;
+        outline: 0 !important;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-wrap: normal;
+    }
+    .ellipsisNum {
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        display: box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+    }
+<meta name="wap-font-scale" content="no" />
+
+html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+body {font-size: 1.4rem;/*1.4 × 10px = 14px */}
+h1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}
+
+/*Android多数时候会和rotate冲突，采用-webkit-backface-visibility:hidden可以适当 解决元素闪动的问题*/
+//-webkit-backface-visibility:hidden;
+//-webkit-perspective:1000;
+/*抗锯齿可以缓解字 体变虚的问题*/
+//    -webkit-font-smoothing: antialiased/subpixel-antialiased
+/*可以同时屏蔽ios和android下点击元素时出现的阴影*/
+//-webkit-tap-highlight-color:rgba(255,255,255,0)
+
+/*可以同时屏蔽输入框怪异的内阴影*/
+//-webkit-appearance:none
+
+/*在ios下可以让动画更加流畅（这个属性会调用硬件加速模式），但是在android下不可乱用，很多见所未见的bug就是因为这个*/
+//-webkit-transform:translate3d(0, 0, 0)
+
+/*可以预定义很多你所想到的动画，然后通过-webkit-transition来调用*/
+//@-webkit-keyframes
+
+/*可以做高清图标，不过一些低版本的android只能识别background-size，所以有必要两个都要写上；用这个属性的时候推荐使用cover这个值，可以自动去匹配宽和高*/
+//-webkit-background-size
+
+/*多用这个属性，可以美化文字效果*/
+//text-shadow
+
+/*border-radius、box-shadow、gradient、border-image，不解释，可以精简代码。*/
+/*android、ios4及以下，固定宽/高块级元素的overflow:scroll/auto失效，属于浏览器的bug，可借助第三方工具实现。*/
+/*ios5+可以通过scrollTo(0,0)来自动隐藏浏览器地址栏。*/
+/*<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">width可是宽度，initial-scale初始化缩放比例，maximum-scale允许用户缩放的最大比例，minimum-scale允许用户缩放的最小比例，user-scalable是否允许用户缩放。*/
+/*允许用户添加到主屏幕，并提供webapp的支持。*/
+/*css3动画会影响你的自动聚焦，所以自动聚焦要在动画执行之前来做，或者直接舍弃。*/
+/*使用media query适配不同屏幕。*/
+/*如果涉及较多域外链接，DNS Prefetching可以帮你做DNS预解析。*/
+/*如果你希望你的站点更多地在SNS上传播，那么Open Graph Protocol会比较适合你。*/
+/*当用iScroll时候，不能使用:focus{outline:0}伪类，否则滑动会卡*/
+
+/*IE下iframe的设置透明
+<iframe src="about:blank" allowTransparency="true"></iframe>*/
+
+/*自定义鼠标路径要用绝对路径，不然不显示
+.some_element {
+  cursor:url("http://www.url.com/cursor.cur")
+}*/
+
+/*禁止使用输入法（IE）
+.some_element {
+  ime-mode:disabled;
+}*/
+
+/*文本强制换行
+.some_element {
+  word-wrap:break-wrod;
+  word-break:break-all;
+  table-layout:fixed; *//* TABLE类还要加这个 *//*
+}*/
+
+/*变灰（IE）
+.some_element {
+  filter:gray;
+  color:gray;
+}*/
+
+/*　CSS Reset
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+*//* HTML5 display-role reset for older browsers *//*
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}*/
+
+/*
+禁止使用 * 选择器
+* {
+  margin:0;
+}
+禁止使用expression
+.some_element {
+  width: expression((documentElement.clientWidth < 725) ? "725px" : "auto" );
+}
+最终发布样式避免使用@import
+@import url('a.css');
+尽量避免使用 ID 选择器，为了提升样式重用性以及与页面的耦合性
+#id {
+  margin:0;
+}
+尽量避免使用 !important，为了减少后续工作复杂度
+.some_element{
+ color:red !important;
+}
+禁用 outline:none 或 outline:0，为了帮助使用我们产品有障碍的人士（如：盲人）
+a {
+ outline: none;
+}
+a {
+  outline: 0;
+}
+值为0时不需要任何单位
+.some_element {
+ padding:0 5px;
+}
+避免使用多类选择符，IE6以及更古老的浏览器对类似 .some.element 的多类选择符解析不正确
+.some.element {
+  color:red;
+}
+移除空的css规则
+.some_element {
+}*/
+
+/*
+Meta 值是SEO优化的关键
+<meta name="description" content="" />
+<meta name="keywords" content=""/>
+Title 部分更是SEO优化的关键
+<title></title>*/
+
+使用Android WebView来渲染页面时，HTML中的元素如input、img、select等在获得焦点时会有黄色或者蓝色的边框，如何移除该边框，以下提供了几种方法。
+
+方法一：移除tap-highlight-color
+
+*{
+  -webkit-tap-highlight-color: transparent;
+}
+方法二：给元素添加如下:focus伪类样式
+
+*:focus {
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-user-modify:read-write-plaintext-only;
+}
+方法三：给元素添加如下样式
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+:focus {
+  outline: 0;
+  border:none;
+  color: rgba(0, 0, 0, 0);
+}
+方法四：给元素添加如下样式
+
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
+  outline: none !important;
+  -webkit-user-modify: read-write-plaintext-only !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+
+/*页面变灰代码*/
+html {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+  _filter:none;
+}
+
+%fontFamily {
+	font: normal 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font: normal 12px/1.5 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: Tahoma,Verdana,Georgia,Helvetica,Arial,'Lucida Family',Times,'Trebuchet MS', sans-serif;
+	font-family: Tahoma,Verdana,Helvetica, Arial, sans-serif;
+}
+input[type=submit],
+input[type=reset],
+input[type=button]{
+	filter:chroma(color=#000000);
+}
+button {
+	width: auto;
+	overflow: visible;
+}
+%graypage {
+	filter:gray;
+	color:gray;
+}
+
+%inputImeModeIe {
+	ime-mode:disabled;
+}
+
+%userSelect {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-o-user-select:none;
+	-ms-user-select:none;
+	-khtml-user-select:none;
+	user-select:none;
+}
+
+%cursorImg {
+	cursor:url("http://www.url.com/cursor.cur")
+}
+
+//每个浏览器内核版本的常用HACK
+//%hack {
+//	.all-IE { property:value\9; }
+//	:root .IE-9 { property:value\0/;}
+//	.gte-IE-8 { property:value\0; }
+//	.lte-IE-7 {  *property:value; }
+//	.IE-7 {  +property:value; }
+//	.IE-6 { _property:value; }
+//	.not-IE {  property//:value;}
+//	@-moz-document url-prefix () { .firefox { property:value; } }
+//	@media all and (-webkit-min-device-pixel-ratio:0) { .webkit { property:value; } }
+//	@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) { .opera { property:value; } }
+//	@media screen and (max-device-width: 480px) { .iphone-or-mobile-s-webkit { property:value; } }
+//}
+
+//translate3d 闪的问题：
+//-webkit-backface-visibility:hidden;
+//-webkit-perspective:1000;
+
+/*gradient渐变
+http://www.colorzilla.com/gradient-editor/*/
+
+/*滚动条颜色（IE）
+.some_element {
+  scrollbar-3d-light-color:#FF0000;
+  scrollbar-arrow-color:#FF0000;
+  scrollbar-Base-color:#000000;
+  scrollbar-track-color:#000000;
+  scrollbar-dark-shadow-color:#330000;
+  scrollbar-face-color:#000000;
+  scrollbar-highlight-color:#FF0000;
+  scrollbar-shadow-color:#990000;
+}*/
+
+%scrollBar {
+	scrollbar-3d-light-color:#FF0000;
+	scrollbar-arrow-color:#FF0000;
+	scrollbar-Base-color:#000000;
+	scrollbar-track-color:#000000;
+	scrollbar-dark-shadow-color:#330000;
+	scrollbar-face-color:#000000;
+	scrollbar-highlight-color:#FF0000;
+	scrollbar-shadow-color:#990000;
+
+	::-webkit-scrollbar {
+		padding-left: 1px;
+		border-left: 1px solid #D5D5D5;
+		background-color: #FAFAFA;
+		overflow: visible;
+		width: 13px;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: rgba(0, 0, 0, .2);
+		background-clip: padding-box;
+		border: 1px solid transparent;
+		border-left-width: 2px;
+		min-height: 15px;
+		box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+	}
+	::-webkit-scrollbar-thumb:vertical:hover {
+		background-color: rgba(0, 0, 0, .3);
+	}
+	::-webkit-scrollbar-thumb:vertical:active {
+		background-color: rgba(0, 0, 0, .5);
+	}
+	::-webkit-scrollbar-button {
+		height: 0;
+		width: 0;
+	}
+	::-webkit-scrollbar-track {
+		background-clip: padding-box;
+		border: solid transparent;
+		border-width: 0 0 0 4px;
+	}
+	::-webkit-scrollbar-corner {
+		background: transparent;
+	}
+}
+
+%minHeight {
+	min-height: 100%;
+	height: 100% !important;
+	height: 100%;
+}
+
+%c-fix {
+	&:before, &:after {
+		display: table;
+		content: '.';
+		height: 0;
+		font-size: 0;
+		line-height: 0;
+		visibility: hidden;
+	}
+	&:after {
+		clear: both;
+	}
+	*zoom: 1;
+}
+
+%cfix {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+
+%left {
+	float: left;
+	display: inline;
+}
+%right {
+	float: right;
+	display: inline;
+}
+
+%over-fix {
+	overflow: hidden;
+	*overflow: visible;
+	zoom: 1;
+}
+
+%hide-text {
+	font: 0/0 a;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0;
+}
+/*
+%plachholder {
+	input:-moz-placeholder,
+	textarea:-moz-placeholder {
+		color: #999999;
+	}
+
+	input:-ms-input-placeholder,
+	textarea:-ms-input-placeholder {
+		color: #999999;
+	}
+
+	input::-webkit-input-placeholder,
+	textarea::-webkit-input-placeholder {
+		color: #999999;
+	}
+}
+*/
+
+%tx-elli {
+	word-wrap: normal;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	outline: 0 !important;
+}
+
+@mixin tx-numelli($num) {
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: -webkit-box;
+	display: box;
+	-webkit-line-clamp: $num;
+	line-clamp: $num;
+	-webkit-box-orient: vertical;
+	box-orient: vertical;
+}
+
+//.example {
+//	@include tx-numelli(2);
+//}
+
+@mixin opacity($opacity) {
+	filter: Alpha(opacity=#{$opacity*100});
+	-moz-opacity: $opacity;
+	-khtml-opacity: $opacity;
+	opacity: $opacity;
+}
+
+//.example {
+//	@include opacity(0.75);
+//}
+
+@mixin bg-opacity($color, $alpha) {
+	$c: rgba($color, $alpha);
+	$ie_c: ie_hex_str($c);
+	background: rgba($color, $alpha);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=#{$ie_c}, endColorstr=#{$ie_c});
+	zoom: 1;
+	:root & {
+		filter: none\9;
+	}
+}
+
+//.example {
+//	@include bg-opacity(#000000,0.75);
+//}
+@mixin bgpng24($png24img){
+	background: url($png24img);
+	_background:none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$png24img}', sizingMethod='crop');
+}
+//.example {
+//	@include bgpng24('png0124.png');
+//}
+
+
+
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  content: ''; display: table; clear: both;
+}
+
+.cell {
+  display: table-cell; width: 9999px;
+  *display: inline-block; *width: auto;
+}
+
+%cell {
+display: table-cell;
+*display: inline-block;
+width: 3000px;
+*width: auto;
+table-layout: fixed;
+word-break: break-all;
+}
+
+%fixfirefox {
+display: table;
+width: 100%;
+word-wrap:break-wrod;
+word-break:break-all;
+table-layout:fixed;
+}
+
+@mixin tablecell($table: 'tableClassName') {
+	@extend %cell;
+	.#{$table} {
+		@extend %fixfirefox;
+	}
+}
+
+//.example {
+//    @include tablecell(div);
+//}
+
+%dib {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: text-top;
+}
+
+%DIBINNER {
+	@extend %dib;
+	font-size: 12px;
+	letter-spacing: normal;
+	word-spacing: normal;
+	vertical-align: text-top;
+}
+
+%DIBWRAP {
+	font-size: 0;
+	*word-spacing: -1px;
+	@media screen and (-webkit-min-device-pixel-ratio: 0) {
+		& {
+			letter-spacing: -5px;
+		}
+	}
+}
+
+@mixin dibBox($sun: li) {
+	@extend %DIBWRAP;
+	#{$sun} {
+		@extend %DIBINNER;
+	}
+}
+//.example {
+//    @include dibBox(div);
+//}
+
+
+.test1 {
+text-align:justify;
+text-justify:distribute-all-lines;
+text-align-last:justify;
+-moz-text-align-last:justify;
+-webkit-text-align-last:justify;
+}
+
+//justify-all-lines
+%justify-all-lines {
+	overflow: hidden;
+	text-align: justify;
+	-ms-text-justify: distribute-all-lines;
+	text-justify: distribute-all-lines;
+	&:after {
+		display: inline-block;
+		width: 100%;
+		content: '.';
+		font-size: 0;
+		height: 0;
+		line-height: 0;
+		visibility: hidden;
+	}
+}
+//.example {
+//    @extend %justify-all-lines;
+//}
+
+
+@mixin dBoth($left,$right){
+	@extend %c-fix;
+	#{$left},#{$right} {
+		width: 50%;
+	}
+	#{$left} {
+		@extend %left;
+	}
+	#{$right} {
+		@extend %right;
+	}
+}
+//.example {
+//    @include dBoth('.leftSide','.rightSide')
+//}
+
+@mixin dOver($left,$right){
+	@extend %c-fix;
+	#{$left} {
+		@extend %left;
+		width: 35px;
+		height: 35px;
+		overflow: hidden;
+		margin: 3px 10px 0 0;
+		img {
+			vertical-align: middle;
+		}
+	}
+	#{$right} {
+		@extend %over-fix;
+	}
+}
+//.example {
+//    @include dOver('.avatar','.info')
+//}
+
+@mixin dCell($left,$right){
+	@extend %c-fix;
+	#{$left} {
+		@extend %left;
+		width: 35px;
+		height: 35px;
+		overflow: hidden;
+		margin: 3px 10px 0 0;
+		img {
+			vertical-align: middle;
+		}
+	}
+	#{$right} {
+		@extend %cell;
+	}
+}
+//.example {
+//    @include dCell('.avatar','.info')
+//}
+
+%imgVerBox {
+	overflow: hidden;
+	text-align: center;
+	font-size: 0;
+}
+
+%imgVerBoxSpace {
+	display: inline-block;
+	width: 0;
+	height: 100%;
+	overflow: hidden;
+	margin-left: -1px;
+	font-size: 0;
+	line-height: 0;
+	vertical-align: middle;
+}
+
+%img {
+	vertical-align: middle;
+	border: 0 none;
+}
+
+@mixin imgVertical($space: hookName, $img: imgName) {
+	@extend %imgVerBox;
+	#{$space} {
+		@extend %imgVerBoxSpace;
+	}
+	#{$img} {
+		@extend %img;
+	}
+}
+
+//.example {
+//	width:100px;
+//	height:100px;
+//	border:1px solid #000;
+//	padding:10px;
+//	background: red;
+//	@include imgVertical('.hook','.div1');
+//}
+
+%triangle {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	font-size: 0;
+	line-height: 0;
+	vertical-align: middle;
+	_color: #FF3FFF;
+	_filter: chroma(color=#FF3FFF);
+}
+
+@mixin triangle($widthVal, $color, $direction) {
+	@extend %triangle;
+	@if $direction == top {
+		border-bottom: $widthVal solid $color;
+		border-top: 0 none;
+		border-left: $widthVal solid transparent;
+		border-right: $widthVal solid transparent;
+	}
+	@if $direction == bottom {
+		border-top: $widthVal solid $color;
+		border-bottom: 0 none;
+		border-left: $widthVal solid transparent;
+		border-right: $widthVal solid transparent;
+	}
+	@if $direction == left {
+		border-right: $widthVal solid $color;
+		border-left: 0 none;
+		border-top: $widthVal solid transparent;
+		border-bottom: $widthVal solid transparent;
+	}
+	@if $direction == right {
+		border-left: $widthVal solid $color;
+		border-right: 0 none;
+		border-top: $widthVal solid transparent;
+		border-bottom: $widthVal solid transparent;
+	}
+}
+
+//.example {
+//    @include triangle(5px,#FF0100,top);
+//}
+
+@mixin calc($property, $expression) {
+	#{$property}: -moz-calc(#{$expression});
+	#{$property}: -webkit-calc(#{$expression});
+	#{$property}: calc(#{$expression});
+}
+//css3 property
+//.example {
+//	@include calc(width,'100% - 250px')
+//}
+
+//抽奖
+
+@mixin award($height:490,$cl1:red,$cl2:blue,$colNum:5,$rowNum:4,$class:index,$marginVal:6){
+  $totalNum:$colNum*2 + ($rowNum - 2)*2 - 1;
+  $colCell:100% / $colNum;
+  $rowCell:100% / $rowNum;
+  %bgCl1 {
+    background: $cl1;
+  }
+  %bgCl2 {
+    background: $cl2;
+  }
+  position: relative;
+  .awardinnner {
+    position: relative;
+    height: $height + px;
+    li {
+      position: absolute;
+      width:$colCell;
+      height: $rowCell;
+      .box {
+        text-align: center;
+        margin:#{$marginVal}px;
+        height:-moz-calc(100% - #{$marginVal * 2}px);
+        height:-webkit-calc(100% - #{$marginVal * 2}px);
+        height: calc(100% - #{$marginVal * 2}px);
+        @extend %bgCl1;
+        img {
+          vertical-align: middle;
+        }
+      }
+      .giftname {
+        height: 30px;
+        margin-top:-36px;
+        text-align: center;
+        padding:0 6px;
+        word-wrap: normal;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        outline: 0 !important;
+      }
+      &.ahover {
+        background: #00ff00;
+      }
+    }
+    @for $i from 0 through $totalNum {
+      .#{$class}-#{$i}{
+        .box {
+          @if $i%2 == 0 and $cl2 != '' {
+            @extend %bgCl2;
+          }
+        }
+        @if $i < $colNum {
+          top:0;
+          left:$colCell * $i;
+        }
+        @if $i >= $colNum and $i < $totalNum / 2 {
+          top:$rowCell * ($i - $colNum + 1);
+          left:$colCell * ($colNum - 1);
+        }
+        @if $i >= $totalNum / 2 and $i < ($totalNum + 1) - ($rowNum - 2) {
+          top: $rowCell * ($rowNum - 1);
+          left:($totalNum - $i - ($rowNum - 2)) * $colCell;
+        }
+        @if $i >= ($totalNum + 1) - ($rowNum - 2) {
+          top:($totalNum - $i + 1) * $rowCell;
+          left:0;
+        }
+      }
+    }
+  }
+  .awardBoxMiddle {
+    position: absolute;
+    width: 100% / $colNum * ($colNum - 2);
+    height: 100% / $rowNum * ($rowNum - 2);
+    top: $rowCell;
+    left:$colCell;
+  }
+}
+
+.awardbox {
+  //$ form 0
+  //ul.awardinnner>li.index-$*13>div.box>img^div.giftname{$$}
+  //award($height:490,$colNum:5,$rowNum:4,$class:index)
+  @include award(490,#f4d029,#5abced);
+  .txt-tips {
+    background: url(/resource/img/activity/5/txt-award-tips.png) no-repeat center center;
+    height: 115px;
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    border: 0;
+  }
+  .btn-box {
+    padding:0 15px;
+  }
+  .btn-l,.btn-r {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+    width: 49%;
+    vertical-align: middle;
+    text-align: center;
+    .btn-award {
+      display: inline-block;
+      background: #fff;
+      border:2px solid #d4bb2a;
+      padding:5px;
+      &,&:hover {
+        text-decoration: none;
+      }
+      span {
+        display: inline-block;
+        border:2px solid #d4bb2a;
+        background: #f4d029;
+        padding:8px 20px;
+        color:#fff;
+        font:24px/1.5 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+    }
+    .btn-award1 {
+      border-color: #44a2e1;
+      span {
+        border-color:#44a2e1;
+        background:#5abced;
+      }
+    }
+    p {
+      padding: 15px 0 0;
+      color:#44a2e1;
+    }
+    i {
+      font-style: normal;
+      color:#f45000;
+    }
+  }
+}
+/*
+@media screen and (min-device-width: 320px) {
+}
+@media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+}
+*/
+
+/*使用sass定义一个@mixin更容易解决为兼容浏览器写的各种混合语法：*/
+
+
+@mixin flexbox() {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+/*
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+
+  -webkit-flex-flow: row wrap;
+  justify-content: flex-end;
+
+  -webkit-align-items: center;
+  align-items: center;*/
+}
+/*
+http://tympanus.net/codrops/css_reference/flexbox/
+flex-direction
+flex-wrap
+flex-flow
+justify-content
+align-items
+align-content
+order
+align-self
+flex-grow
+flex-shrink
+flex-basis
+flex*/
+
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;      /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: $values;         /* OLD - Firefox 19- */
+  width: 20%;               /* For old syntax, otherwise collapses. */
+  -webkit-flex: $values;          /* Chrome */
+  -ms-flex: $values;              /* IE 10 */
+  flex: $values;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-ordinal-group: $val;      /* OLD - Firefox 19- */
+  -ms-flex-order: $val;              /* TWEENER - IE 10 */
+  -webkit-order: $val;               /* NEW - Chrome */
+  order: $val;                       /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.container {
+  @include flexbox();
+}
+
+.item {
+  @include flex(1 200px);
+  @include order(2);
+}

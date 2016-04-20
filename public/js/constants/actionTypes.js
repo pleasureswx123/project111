@@ -1,0 +1,12 @@
+export var ADD_TODO = 'ADD_TODO';
+export var COMPLETE_TODO = 'COMPLETE_TODO';
+export var SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+export var VisibilityFilters = {
+    SHOW_ALL: 'SHOW_ALL',
+    SHOW_COMPLETED: 'SHOW_COMPLETED',
+    SHOW_ACTIVE: 'SHOW_ACTIVE'
+};
+
+
+export var TOGGLENAVCLASS = 'TOGGLENAVCLASS';
+
